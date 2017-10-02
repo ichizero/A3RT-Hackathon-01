@@ -1,3 +1,7 @@
+import os
+
+print(os.environ['A3RT_API_KEY'])
+
 def main(argv):
   # このコードは引数と標準出力を用いたサンプルコードです。
   # このコードは好きなように編集・削除してもらって構いません。
