@@ -1,13 +1,14 @@
-import os
-
-print(os.environ['A3RT_API_KEY'])
+from app.suggester import Suggester
 
 def main(argv):
-  # このコードは引数と標準出力を用いたサンプルコードです。
-  # このコードは好きなように編集・削除してもらって構いません。
-  # ---
-  # This is a sample code to use arguments and outputs.
-  # Edit and remove this code as you like.
+    """
+    main
+    """
 
-  for i, v in enumerate(argv):
-    print("argv[{0}]: {1}".format(i, v))
+    apikey = argv[0]
+
+    print("一言入力してね！")
+    hitokoto = input()
+
+    suggester = Suggester(apikey)
+    print(suggester.getSuggestion(hitokoto))
