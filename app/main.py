@@ -6,9 +6,7 @@ def main(argv):
     """
 
     apikey = argv[0]
-
-    print("一言入力してね！")
-    hitokoto = input()
-
+    hitokoto = argv[1]
+    
     suggester = Suggester(apikey)
     print(suggester.getSuggestion(hitokoto))

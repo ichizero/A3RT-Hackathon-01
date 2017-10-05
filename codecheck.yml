@@ -1,5 +1,5 @@
 build:
 - pip3 install -r requirements.txt
 env:
-  APP_COMMAND: python3 index.py $A3RT_API_KEY
+  APP_COMMAND: python3 index.py $A3RT_API_KEY "馬"
 test: mocha
