@@ -1,3 +1,4 @@
+import os
 from app.suggester import Suggester
 
 def main(argv):
@@ -5,10 +6,8 @@ def main(argv):
     main
     """
 
-    apikey = argv[0]
-    hitokoto = argv[1]
-
-    print(apikey)
+    apikey = os.environ['A3RT_API_KEY']
+    hitokoto = argv[0]
     
     suggester = Suggester(apikey)
     print(suggester.getSuggestion(hitokoto))
