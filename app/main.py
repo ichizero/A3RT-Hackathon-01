@@ -7,6 +7,8 @@ def main(argv):
 
     apikey = argv[0]
     hitokoto = argv[1]
+
+    print(apikey)
     
     suggester = Suggester(apikey)
     print(suggester.getSuggestion(hitokoto))
