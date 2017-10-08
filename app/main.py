@@ -8,6 +8,12 @@ def main(argv):
 
     apikey = os.environ['A3RT_API_KEY']
     hitokoto = argv[0]
-    
-    suggester = Suggester(apikey)
-    print(suggester.getSuggestion(hitokoto))
+
+    sugg = Suggester(apikey)
+    print(sugg.get_suggestion(hitokoto))
+
+    # 要約API
+
+    # 画像検索API
+
+    # Twitter投稿

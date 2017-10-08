@@ -15,8 +15,10 @@ class Suggester:
         """
         self.url = "https://api.a3rt.recruit-tech.co.jp/text_suggest/v2/predict"
         self.apikey = apikey
+        self.style = "cbfdb8ea-9e12-4092-9330-2231132f409a" # 0 : 現代文
+        self.separation = 2 # 2: センテンスを生成
 
-    def getSuggestion(self, prev_desc):
+    def get_suggestion(self, prev_desc):
         """
         APIから得たテキストを返します。
 
@@ -29,10 +31,10 @@ class Suggester:
 
         # GET パラメータ
         params = {
-            "apikey": self.apikey, # API KEY
-            "previous_description": prev_desc, # 生成に用いる入力文
-            "style": 0,       # 現代文
-            "separation": 2   # センテンスを生成
+            "apikey":               self.apikey,    # API KEY
+            "previous_description": prev_desc,      # 生成に用いる入力文
+            "style":                self.style,     # 生成文のスタイル
+            "separation":           self.separation # 生成形式
         }
 
         # URL末尾にパラメータを追加
@@ -45,6 +47,10 @@ class Suggester:
 
         return data["suggestion"]
 
+    def change_param(self, style=0, separation=2):
+        self.style = style
+        self.separation = separation
+
 if __name__ == '__main__':
     sugg = Suggester(sys.argv[1])
-    print(sugg.getSuggestion(input()))
+    print(sugg.get_suggestion(input()))
