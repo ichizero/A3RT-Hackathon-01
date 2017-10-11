@@ -1,5 +1,5 @@
 """
-学習データセット用のテキストをTwitter Streaming APIのstatuses/sampleから取得する
+学習データセット用のテキストをTwitter Streaming APIのstatuses/fliterから取得する
 """
 
 import os
@@ -21,10 +21,13 @@ def main():
                   os.environ['TWITTER_ACS_KEY'],
                   os.environ['TWITTER_ACS_SEC'])
 
-    stream = requests.get(
-        "https://stream.twitter.com/1.1/statuses/sample.json?language=ja",
+    params = {"track": "ハロウィン"}
+
+    stream = requests.post(
+        "https://stream.twitter.com/1.1/statuses/filter.json",
         auth=auth,
         stream=True,
+        params=params
     )
 
     file_path = "tweet.txt"

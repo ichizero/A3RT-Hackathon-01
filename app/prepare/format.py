@@ -9,9 +9,11 @@ def format_tweet(tweet):
     """
     取得した文章のデータ整形を行う。
     """
-    tweet = re.sub(r"https://[A-Za-z0-9.-/?=&]*", "", tweet)
-    tweet = re.sub(r"@[A-Za-z0-9-_]*:*", "", tweet)
-    tweet = re.sub("[(RT)・…\n]", "", tweet)
+    tweet = re.sub(r"https*://[A-Za-z0-9.-/?=&]*", "", tweet)   # URL削除
+    tweet = re.sub(r"@[A-Za-z0-9-_]*:*", "", tweet)     # ID削除
+    tweet = re.sub("[(RT)・…\n(https)(http)]", "", tweet)
+    tweet = re.sub(" {2,}", " ", tweet)     # 2つ以上のスペースを1つに
+    tweet = re.sub("^ ", "", tweet)         # 文頭のスペースを削除
     tweet += "\n"
     return tweet
 
@@ -29,4 +31,4 @@ def is_max_file_size(file_path):
     """
     保存先のファイルが4MBを超えているか確認する。
     """
-    return os.path.getsize(file_path) >= 400000
+    return os.path.getsize(file_path) >= 4000000

@@ -15,7 +15,7 @@ class Suggester:
         """
         self.url = "https://api.a3rt.recruit-tech.co.jp/text_suggest/v2/predict"
         self.apikey = apikey
-        self.style = "cbfdb8ea-9e12-4092-9330-2231132f409a" # 0 : 現代文
+        self.style = "0705a038-e0c3-4b12-b18c-e5b772c4f1cd" # 0 : 現代文
         self.separation = 2 # 2: センテンスを生成
 
     def get_suggestion(self, prev_desc):
