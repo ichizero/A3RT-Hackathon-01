@@ -1,8 +1,9 @@
+"""
+A3RT Text Suggest APIを用いて、テキストを自動生成するクラス
+"""
+
 import sys
-import json
-import urllib
-import urllib.parse
-import urllib.request
+import requests
 
 class Suggester:
     """
@@ -20,7 +21,7 @@ class Suggester:
 
     def get_suggestion(self, prev_desc):
         """
-        APIから得たテキストを返します。
+        APIから得たテキストを返す。
 
         Args:
             prev_desc: 文生成に必要なキーフレーズ
@@ -37,17 +38,16 @@ class Suggester:
             "separation":           self.separation # 生成形式
         }
 
-        # URL末尾にパラメータを追加
-        self.url += "?" + urllib.parse.urlencode(params)
-
-        res = urllib.request.urlopen(self.url)
-        data = json.loads(res.read().decode('utf-8'))
+        data = requests.get(self.url, params=params).json()
         if data["status"] != 0:
             return data["status"]
 
         return data["suggestion"]
 
     def change_param(self, style=0, separation=2):
+        """
+        Text Suggest APIのstyleとseparationを変更する。
+        """
         self.style = style
         self.separation = separation
 
