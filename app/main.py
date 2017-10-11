@@ -12,7 +12,7 @@ def main(argv):
     """
 
     apikey = os.environ['A3RT_API_KEY']
-    if argv[0] is None:
+    if len(argv) == 0:
         source_txt = "今日は"
     else:
         source_txt = argv[0]
