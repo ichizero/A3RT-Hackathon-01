@@ -16,6 +16,7 @@ def main(argv):
 
     sugg = Suggester(apikey)
     result_array = sugg.get_suggestion(source_txt)
+    print(result_array)
     result_txt = source_txt + result_array[0]
     print(result_txt)
 
@@ -25,3 +26,5 @@ def main(argv):
 
     # Twitter投稿
     # post_tweet(result_txt)
+
+    return 0
