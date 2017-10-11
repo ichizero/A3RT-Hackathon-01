@@ -26,5 +26,3 @@ def main(argv):
 
     # Twitter投稿
     # post_tweet(result_txt)
-
-    return 0
