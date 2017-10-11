@@ -1,3 +1,7 @@
+"""
+index
+"""
+
 import sys
 from app.main import main
 
