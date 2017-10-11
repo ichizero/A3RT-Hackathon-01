@@ -1,5 +1,5 @@
 build:
 - pip3 install -r requirements.txt
 env:
-  APP_COMMAND: python3 index.py 馬
+  APP_COMMAND: python3 index.py
 test: mocha

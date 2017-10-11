@@ -12,7 +12,10 @@ def main(argv):
     """
 
     apikey = os.environ['A3RT_API_KEY']
-    source_txt = argv[0]
+    if argv[0] is None:
+        source_txt = "今日は"
+    else:
+        source_txt = argv[0]
 
     sugg = Suggester(apikey)
     result_array = sugg.get_suggestion(source_txt)
