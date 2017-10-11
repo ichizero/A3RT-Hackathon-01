@@ -18,6 +18,7 @@ def main(argv):
         source_txt = argv[0]
 
     sugg = Suggester(apikey)
+    print("DEBUG!!! Before sugg.")
     result_array = sugg.get_suggestion(source_txt)
     print(result_array)
     result_txt = source_txt + result_array[0]
