@@ -25,7 +25,7 @@ def post_tweet(tweet):
 
     params = {"status": tweet}
 
-    request = session.post(url, params=params)
+    request = session.post(url, params=params) # POST
 
     if request.status_code == 200:
         print("OK, tweet posted!")

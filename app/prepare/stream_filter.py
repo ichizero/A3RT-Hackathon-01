@@ -1,45 +1,66 @@
 """
-データセットに用いるテキストをTwitter Streaming APIのstatuses/filterから取得する
+学習データセット用のテキストをTwitter Streaming APIのstatuses/fliterから取得する
 """
 
-import sys
 import os
+import sys
+import json
 
-import twitter
+import requests
+from requests_oauthlib import OAuth1
 
-from format import format_tweet
-from format import is_max_file_size
+from format import format_tweet, is_max_file_size, get_line_numbers
 
-def main(args):
+
+def main(file_name):
     """
     TwitterのStreaming APIを用いてツイートを取得し、txtファイルに保存する。
+
+    Args:
+        file_name(str): 保存先のファイル名
     """
 
-    api = twitter.Api(consumer_key=os.environ['TWITTER_CSM_KEY'],
-                      consumer_secret=os.environ['TWITTER_CSM_SEC'],
-                      access_token_key=os.environ['TWITTER_ACS_KEY'],
-                      access_token_secret=os.environ['TWITTER_ACS_SEC'])
+    auth = OAuth1(os.environ['TWITTER_CSM_KEY'],
+                  os.environ['TWITTER_CSM_SEC'],
+                  os.environ['TWITTER_ACS_KEY'],
+                  os.environ['TWITTER_ACS_SEC'])
 
-    if len(args) != 2:
-        print("Usage: python prep.py #tag1,#tag2")
-        return 1
+    params = {"track": "ハロウィン"}
 
-    track = args[1].split(',')
+    # POST
+    stream = requests.post(
+        "https://stream.twitter.com/1.1/statuses/filter.json",
+        auth=auth,
+        stream=True,
+        params=params
+    )
 
-    file_path = "tweet.txt"
+    file_path = file_name
     save_file = open(file_path, 'a')
+    line_num = get_line_numbers(file_path)
 
-    i = 0
     try:
-        for item in api.GetStreamFilter(track=track):
-            if 'text' in item:
-                text = format_tweet(item['text'])
-                print(str(i) + " : " + text)
-                save_file.write(text)
-            if is_max_file_size(file_path):
-                print("break")
+        for line in stream.iter_lines():
+            try:
+                doc = json.loads(line.decode("utf-8"))
+            except json.JSONDecodeError as e:
+                print('JSONDecodeError: ', e)
+                continue # JSONDecodeエラーが生じた場合、無視して次へ
+
+            line_num += 1
+            print(line_num)
+
+            tweet = format_tweet(doc["text"])
+            print(tweet)
+            save_file.write(tweet)
+
+            if line_num == 9999:
+                print("max text lines")
                 break
-            i += 1
+
+            if is_max_file_size(file_path):
+                print("over 4MB")
+                break
 
     except KeyboardInterrupt:
         save_file.close()
@@ -49,4 +70,8 @@ def main(args):
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    if len(sys.argv) == 1:
+        print("保存先のファイル名を入力してください。")
+        main(input())
+    else:
+        main(sys.argv[1])

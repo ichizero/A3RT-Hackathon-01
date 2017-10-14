@@ -2,8 +2,7 @@
 main
 """
 
-import os
-from app.suggester import Suggester
+from app.suggest import get_suggestion
 from app.post import post_tweet
 
 def main(argv):
@@ -11,14 +10,12 @@ def main(argv):
     main
     """
 
-    apikey = os.environ['A3RT_API_KEY']
     if len(argv) == 0:
         source_txt = "今日は"
     else:
         source_txt = argv[0]
 
-    sugg = Suggester(apikey)
-    result_array = sugg.get_suggestion(source_txt)
+    result_array = get_suggestion(source_txt)
     print(result_array)
     result_txt = source_txt + result_array[0]
     print(result_txt)
