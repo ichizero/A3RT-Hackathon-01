@@ -2,23 +2,29 @@
 main
 """
 
+import sys
+
 from app.suggest import get_suggestion
 from app.post import post_tweet
+
 
 def main(argv):
     """
     main
     """
 
-    if len(argv) == 0:
-        source_txt = "今日は"
-    else:
-        source_txt = argv[0]
+    if len(argv) < 3:
+        print("3つ以上の引数が必要です。")
+        sys.exit()
 
-    result_array = get_suggestion(source_txt)
-    print(result_array)
-    result_txt = source_txt + result_array[0]
-    print(result_txt)
+    tweet = ""
+
+    for source_txt in argv:
+        result_array = get_suggestion(source_txt)
+        result_txt = source_txt + result_array[0]
+        print(result_txt)
+        tweet += result_txt
+        tweet += "\n"
 
     # 要約API
 
