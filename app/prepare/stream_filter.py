@@ -4,20 +4,19 @@
 
 import os
 import sys
-import json
 
 import requests
 from requests_oauthlib import OAuth1
 
-from format import format_tweet, is_max_file_size, get_line_numbers
+from save import save_tweet
 
 
-def main(file_name):
+def main(file_path):
     """
     TwitterのStreaming APIを用いてツイートを取得し、txtファイルに保存する。
 
     Args:
-        file_name(str): 保存先のファイル名
+        file_path(str): 保存先のファイル名
     """
 
     auth = OAuth1(os.environ['TWITTER_CSM_KEY'],
@@ -35,38 +34,7 @@ def main(file_name):
         params=params
     )
 
-    file_path = file_name
-    save_file = open(file_path, 'a')
-    line_num = get_line_numbers(file_path)
-
-    try:
-        for line in stream.iter_lines():
-            try:
-                doc = json.loads(line.decode("utf-8"))
-            except json.JSONDecodeError as e:
-                print('JSONDecodeError: ', e)
-                continue # JSONDecodeエラーが生じた場合、無視して次へ
-
-            line_num += 1
-            print(line_num)
-
-            tweet = format_tweet(doc["text"])
-            print(tweet)
-            save_file.write(tweet)
-
-            if line_num == 9999:
-                print("max text lines")
-                break
-
-            if is_max_file_size(file_path):
-                print("over 4MB")
-                break
-
-    except KeyboardInterrupt:
-        save_file.close()
-        sys.exit()
-
-    save_file.close()
+    save_tweet(stream, file_path)
 
 
 if __name__ == '__main__':
