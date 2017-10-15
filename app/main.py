@@ -28,4 +28,4 @@ def main(argv):
         tweet += "\n"
 
     # Twitterへ投稿
-    post_tweet(tweet)
+    post_tweet(tweet)
