@@ -28,6 +28,7 @@
 (./app/auth/auth.pyにてwebbrowserを利用)
 
 環境変数
+
 | 変数名 | 説明 |
 | ---- | ---- |
 | A3RT\_API\_KEY | A3RT Text Suggest APIのAPIキー|
