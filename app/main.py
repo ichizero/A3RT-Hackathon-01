@@ -1,5 +1,5 @@
 """
-ズボラSNS
+ズボラった〜
 """
 
 import sys
@@ -13,8 +13,8 @@ def main(argv):
     app main function
     """
 
-    if len(argv) < 3:
-        print("3つ以上の引数が必要です。")
+    if len(argv) < 2:
+        print("2つ以上の引数が必要です。")
         sys.exit()
 
     tweet = ""
@@ -27,5 +27,5 @@ def main(argv):
         tweet += result_txt
         tweet += "\n"
 
-    # Twitter投稿
-    # post_tweet(result_txt)
+    # Twitterへ投稿
+    post_tweet(result_txt)

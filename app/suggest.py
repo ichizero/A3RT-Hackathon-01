@@ -19,7 +19,7 @@ def get_suggestion(prev_desc):
 
     url = "https://api.a3rt.recruit-tech.co.jp/text_suggest/v2/predict"
     apikey = os.environ["A3RT_API_KEY"]
-    style = os.environ["MODEL_ID_03"]
+    style = os.environ["MODEL_ID"]
     separation = 2 # 2: センテンスを生成
 
     # GET parameter
