@@ -27,5 +27,7 @@ def main(argv):
         tweet += result_txt
         tweet += "\n"
 
+    tweet += "\nズボラった〜(https://github.com/ichizero/A3RT-Hackathon-01)より"
+
     # Twitterへ投稿
     post_tweet(tweet)
