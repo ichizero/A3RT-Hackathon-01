@@ -58,7 +58,7 @@ python index.py 引数1 引数2
 
 生成結果はCLI上に表示される他、Twitterにて確認することができる。
 
-CodeCheckに設定したAccess Tokenでは、[@ichizero_01](https://twitter.com/ichizero_01)アカウントへ投稿される。
+CodeCheckに設定したAccess Tokenでは、[@ichizero_01](https://twitter.com/ichizero_01)アカウントへ投稿される。
 
 ## ファイル構成
 
@@ -76,8 +76,8 @@ CodeCheckに設定したAccess Tokenでは、[@ichizero_01](https://twitter.com/
 | ./app/prepare/ | |
 | ./app/prepare/format.py | データセット用ツイートの整形 |
 | ./app/prepare/save.py | データセット用ツイートの保存 |
-| ./app/prepare/stream_filter.py | データセット用ツイート取得(statuses/filter) |
-| ./app/prepare/stream_sample.py | データセット用ツイート取得(statuses/sample) |
+| ./app/prepare/stream_filter.py | データセット用ツイート取得(statuses/filter) |
+| ./app/prepare/stream_sample.py | データセット用ツイート取得(statuses/sample) |
 
 
 
@@ -87,13 +87,13 @@ CodeCheckに設定したAccess Tokenでは、[@ichizero_01](https://twitter.com/
 
 しかし、ツイートにはタグやアカウントIDなどのノイズが多数含まれていたため、学習後の生成文が文としての形を成していなかった。
 
-そのため、取得ツイートをフィルタリングすることで、どうにか文章のようなものを生成することができた。
+そのため、取得ツイートをフィルタリングすることで、どうにか文章のようなものを生成することができた。
 
 ## 問題
 
-### 1. 自分のTwitterへしか投稿できない
+### 1. 自分のTwitterへしか投稿できない
 
-Access TokenにTwitterアプリケーション登録時に生成したキーを利用したため、自身の鍵アカウントでしか投稿できなかった。
+Access TokenにTwitterアプリケーション登録時に生成したキーを利用したため、自身の鍵アカウントでしか投稿できなかった。
 
 急遽、Access Tokenを取得するコードを追加。
 
@@ -101,4 +101,4 @@ Access TokenにTwitterアプリケーション登録時に生成したキーを
 
 データセットを作成する際にフィルタリングは行ったものの、なかなか文章の生成精度が上がらなかった。
 
-短文ツイート、単語の羅列、ボットによる投稿などが影響しているものと思われる。
+短文ツイート、単語の羅列、ボットによる投稿などが影響しているものと思われる。
